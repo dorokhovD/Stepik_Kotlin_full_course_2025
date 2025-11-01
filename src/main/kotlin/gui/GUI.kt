@@ -1,4 +1,4 @@
-package org.example
+package org.example.gui
 
 fun main() {
     val rectangle = Rectangle(width = 8, length = 5)

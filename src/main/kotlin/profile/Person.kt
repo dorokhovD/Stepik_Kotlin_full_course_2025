@@ -1,4 +1,4 @@
-package org.example
+package org.example.profile
 
 class Person {
     val name: String
