@@ -1,9 +1,10 @@
 package corporation
 
 class Director(
+    id: Int,
     name: String,
     age: Int
-): Worker(name = name) {
+): Worker(id = id, name = name, age = age, WorkerType.DIRECTOR) {
 
     fun takeCoffee(assistant: Assistant) {
         val drinkName: String = assistant.bringCoffee()
