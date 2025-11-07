@@ -1,10 +1,10 @@
 package org.example.profile
 
 class Person {
-    val name: String
-    val age: Int
-    val height: Int
-    val weight: Int
+    private val name: String
+    private val age: Int
+    private val height: Int
+    private val weight: Int
 
     constructor(name: String, age: Int, height: Int, weight: Int) {
         this.name = name

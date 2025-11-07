@@ -1,16 +1,16 @@
 package corporation
 
-open class ProductCard (
+abstract class ProductCard (
    val name: String,
    val brand: String,
    val price: Int,
    val productType: ProductType
 ){
-
-   open fun printInfo() {
-      print("Name: $name Brand: $brand Price: $price Product type: ${productType.title}")
+   fun printInfo() {
+      print(this)
    }
-
 
 }
 
+
+//print("Name: $name Brand: $brand Price: $price Product type: ${productType.title}")

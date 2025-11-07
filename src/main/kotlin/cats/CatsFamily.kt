@@ -1,9 +1,9 @@
 package cats
 
-open class CatsFamily(
+abstract class CatsFamily(
     val legsCount: Int = 4
 ) {
-
+    abstract fun eat()
 
 
 }

@@ -6,7 +6,11 @@ class Consultant(
     id: Int,
     name: String,
     age: Int = 0,
-): Worker(id = id, name = name, age = age, WorkerType.CONSULTANT) {
+): Worker(id = id, name = name, age = age, WorkerType.CONSULTANT), Cleaner {
+
+    override fun clean() {
+        println("My position is Consultant. I,m cleaning workplace...")
+    }
 
     fun serveCustomers(): Int {
         val count = Random.nextInt(0, 10)

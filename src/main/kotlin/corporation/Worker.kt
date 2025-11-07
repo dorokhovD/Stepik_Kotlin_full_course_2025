@@ -2,17 +2,19 @@ package corporation
 
 import javax.swing.text.Position
 
-open class Worker(
-    val id: Int = 0,
-    val name: String,
-    val age: Int = 0,
-    val workerType: WorkerType
+abstract class Worker(
+       val id: Int = 0,
+       val name: String,
+       val age: Int = 0,
+       val workerType: WorkerType
 ) {
-    open fun work() {
-        println("working...")
+    abstract fun work()
+
+    fun printInfo() {
+        println(this)
     }
 
-    open fun printInfo() {
-        println("Id: $id Name: $name Age: $age Position: $workerType")
+    override fun toString(): String {
+        return "Id: $id Name: $name Age: $age Position: $workerType"
     }
 }

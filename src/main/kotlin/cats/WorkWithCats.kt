@@ -5,12 +5,12 @@ import cats.Lion
 
 fun main() {
     val cat = Cat("Sam")
-    println(cat.legsCount)
-    println(cat.name)
-
     val lion = Lion(5)
-    println(lion.legsCount)
-    println(lion.countInPride)
+    val animals = listOf<CatsFamily>(cat, lion)
 
-    println(cat.playWithMouse())
+    for (animal in animals) {
+        animal.eat()
+    }
+//    cat.eat()
+//    lion.eat()
 }

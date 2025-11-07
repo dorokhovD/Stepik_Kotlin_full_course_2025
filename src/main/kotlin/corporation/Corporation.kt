@@ -12,7 +12,9 @@ fun main() {
 //        employee.work()
 //    }
     val accountant = Accountant(0, "Bob", 25)
-    accountant.work()
+
+    accountant.printInfo()
+
 
 //    val shoeCard = ShoeCard(name = "Sneakers", brand = "Asics", size = 42f, price = 7000)
 //    shoeCard.printInfo()
