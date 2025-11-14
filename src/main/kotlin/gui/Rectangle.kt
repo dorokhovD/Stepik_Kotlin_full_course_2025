@@ -1,23 +1,19 @@
 package org.example.gui
 
-class Rectangle {
+class Rectangle(
+    var width: Int = 0, //Ширина
+    var height: Int = 0
+) {
 
-    val width: Int //Ширина
-    val length: Int //Длина
-
-    constructor(): this(0)
-
-    constructor(width: Int, length: Int) {
-        this.width = width
-        this.length = length
-    }
+    val area: Int
+        get() = width * height
 
     constructor(size: Int): this (size, size)
 
     fun draw() {
         var i = 0
         var j = 0
-        while (i < length) {
+        while (i < height) {
             while (j < width) {
                 print("* ")
                 j++

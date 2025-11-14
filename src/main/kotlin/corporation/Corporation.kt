@@ -11,9 +11,9 @@ fun main() {
 //    for (employee in employees) {
 //        employee.work()
 //    }
-    val accountant = Accountant(0, "Bob", 25)
+    val accountant = Accountant(0, "Bob", 25, salary = 100000)
 
-    accountant.printInfo()
+    accountant.work()
 
 
 //    val shoeCard = ShoeCard(name = "Sneakers", brand = "Asics", size = 42f, price = 7000)

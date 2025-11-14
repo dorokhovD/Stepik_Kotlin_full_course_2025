@@ -6,7 +6,14 @@ class Consultant(
     id: Int,
     name: String,
     age: Int = 0,
-): Worker(id = id, name = name, age = age, WorkerType.CONSULTANT), Cleaner {
+    salary: Int
+): Worker(
+    id = id,
+    name = name,
+    age = age,
+    workerType = WorkerType.CONSULTANT,
+    salary = salary,
+), Cleaner {
 
     override fun clean() {
         println("My position is Consultant. I,m cleaning workplace...")

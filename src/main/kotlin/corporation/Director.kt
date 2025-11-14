@@ -3,8 +3,15 @@ package corporation
 class Director(
     id: Int,
     name: String,
-    age: Int
-): Worker(id = id, name = name, age = age, WorkerType.DIRECTOR), Supplier {
+    age: Int,
+    salary: Int
+): Worker(
+    id = id,
+    name = name,
+    age = age,
+    workerType = WorkerType.DIRECTOR,
+    salary = salary
+), Supplier {
 
     override fun buyThings() {
         println("I'm buying things..")
