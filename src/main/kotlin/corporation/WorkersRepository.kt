@@ -2,43 +2,77 @@ package corporation
 
 import java.io.File
 
-class WorkersRepository {
+object WorkersRepository {
 
     private val fileWorkers = File("workers.txt")
-    val workers = loadAllEmployees()
+    private val _workers = loadAllEmployees()
+    val workers
+        get() = _workers.toList()
 
+    fun registerNewEmployee(newWorker: Worker) {
+        _workers.add(newWorker)
+    }
 
-    fun registerNewEmployee(worker: Worker) {
-        workers.add(worker)
+    fun findAssistant(): Assistant? {
+        for (worker in _workers) {
+            if (worker is Assistant) {
+                return worker
+            }
+        }
+        return null
+    }
+
+    fun findDirector(): Director? {
+        for (worker in _workers) {
+            if (worker is Director) {
+                return worker
+            }
+        }
+        return null
+    }
+
+    fun changeAge(id: Int, age: Int) {
+        for ( worker in _workers) {
+            if (worker.id == id) {
+                val newWorker = worker.copy(age = age)
+                _workers.remove(worker)
+                _workers.add(newWorker)
+                break
+            }
+        }
     }
 
     fun changeSalary(id: Int, salary: Int) {
-        for (worker in workers) {
+        for ( worker in _workers) {
             if (worker.id == id) {
-                worker.setSalary(salary)
+                val newWorker = worker.copy(salary = salary)
+                _workers.remove(worker)
+                _workers.add(newWorker)
+                break
             }
         }
     }
 
     fun saveChanges() {
         val content = StringBuilder()
-        for (worker in workers) {
-            content.append("${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.workerType}\n")
+        for (worker in _workers) {
+            content.append("${worker.id}%${worker.name}%${worker.age}%${worker.salary}%${worker.workerType}\n")
         }
         fileWorkers.writeText(content.toString())
     }
 
     fun fireAnEmployee(id: Int) {
-        for (worker in workers) {
+        for (worker in _workers) {
             if (worker.id == id) {
-                workers.remove(worker)
+                _workers.remove(worker)
                 break
             }
         }
     }
 
-    private fun loadAllEmployees(): MutableList<Worker> {
-        val workers = mutableListOf<Worker>()
+    private fun loadAllEmployees(): MutableSet<Worker> {
+        println("loadAllEmployees")
+        val workers = mutableSetOf<Worker>()
 
         if (!fileWorkers.exists()) fileWorkers.createNewFile()
 
@@ -54,7 +88,7 @@ class WorkersRepository {
             val salary = properties[3].toInt()
             val type = properties.last()
             val workerType = WorkerType.valueOf(type)
-            val worker = when(workerType) {
+            val worker = when (workerType) {
                 WorkerType.DIRECTOR -> Director(id, name, age, salary)
                 WorkerType.ACCOUNTANT -> Accountant(id, name, age, salary)
                 WorkerType.ASSISTANT -> Assistant(id, name, age, salary)

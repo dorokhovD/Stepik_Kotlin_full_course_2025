@@ -1,10 +1,12 @@
 package corporation
 
-class Accountant(
-    id: Int,
-    name: String,
-    age: Int,
-    salary: Int
+import javax.swing.text.Position
+
+data class Accountant(
+    override val id: Int,
+    override val name: String,
+    override val age: Int,
+    override val salary: Int
 ): Worker(
     id = id,
     name = name,
@@ -13,8 +15,8 @@ class Accountant(
     workerType = WorkerType.ACCOUNTANT
 ), Cleaner, Supplier {
 
-    private val workersRepository = WorkersRepository()
-    private val productCardsRepository = ProductCardsRepository()
+    private val workersRepository = WorkersRepository
+    private val productCardsRepository = ProductCardsRepository
 
 
     override fun clean() {
@@ -50,8 +52,17 @@ class Accountant(
                 OperationCode.FIRE_AN_EMPLOYEE -> fireAnEmployee()
                 OperationCode.SHOW_ALL_EMPLOYEES -> showAllEmployees()
                 OperationCode.CHANGE_SALARY -> changeSalary()
+                OperationCode.CHANGE_AGE -> changeAge()
             }
         }
+    }
+
+    private fun changeAge() {
+        print("Enter employee's id to change age: ")
+        val id = readln().toInt()
+        print("Enter new age: ")
+        val age = readln().toInt()
+        workersRepository.changeAge(id = id, age = age)
     }
 
     private fun changeSalary() {
@@ -90,6 +101,10 @@ class Accountant(
             WorkerType.CONSULTANT -> Consultant(id, name, age, salary)
         }
         workersRepository.registerNewEmployee(worker)
+    }
+
+    override fun copy(id: Int, name: String, age: Int, salary: Int, workerType: WorkerType): Worker {
+        return copy(id = id, name = name, age = age, salary = salary)
     }
 
     private fun fireAnEmployee() {

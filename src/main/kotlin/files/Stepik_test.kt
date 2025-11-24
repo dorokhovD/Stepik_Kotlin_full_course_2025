@@ -1,60 +1,47 @@
-package files
-
 fun main() {
-    val car = Car("Nissan", "X-Trail", 2015, "1337", "Gray")
+    val number = 0
+    processNumber(number)
+}
 
-    val order1 = Order(1, "completed", "electronics")
-    val order2 = Order(2, "completed", "clothing")
-    val order3 = Order(3, "canceled", "furniture")
-    val order4 = Order(4, "completed", "clothing")
+/**
+ * Класс NumberValidator выполняет проверку чисел.
+ */
+object NumberValidator {
 
-    val orders: List<Order> = listOf<Order>(order1, order2, order3, order4)
-    val newOrders = removeCompletedOrders(orders, "clothing")
-
-    for (order in newOrders) {
-        println("${order.id} ${order.status} ${order.type}")
+    /**
+     * Завершает выполнение программы или выбрасывает исключение с заданным сообщением.
+     * Возвращает тип Nothing.
+     */
+    fun terminate(message: String): Nothing {
+        throw IllegalArgumentException(message)
     }
-//    println(serialize(car))
-//    val carAsString = serialize(car)
-//    println(deserialize(carAsString))
-}
-class Car(
-    val make: String,
-    val model: String,
-    val year: Int,
-    val vin: String,
-    val color: String,
-)
 
-fun serialize(car: Car): String {
-    val carAsString = ("${car.make}%${car.model}%${car.year}%${car.vin}%${car.color}")
-    return carAsString
-}
-
-fun deserialize(carAsString: String): Car {
-    val dCar = carAsString.trim().split("%")
-    val carAsClass = Car(
-        make = dCar[0],
-        model = dCar[1],
-        year = dCar[2].toInt(),
-        vin = dCar[3],
-        color = dCar[4]
-    )
-    return carAsClass
-}
-
-data class Order(
-    val id: Int,
-    val status: String,
-    val type: String
-)
-
-fun removeCompletedOrders(orders: List<Order>, typeToRemove: String): List<Order> {
-    val mutableOrders: MutableList<Order> = orders.toMutableList()
-    for (order in orders) {
-        if (order.type == typeToRemove && order.status == "completed") {
-            mutableOrders.remove(order)
+    /**
+     * Проверяет число на корректность.
+     * Если число некорректно, вызывает terminate.
+     * @return то же число, если данные корректны.
+     */
+    fun validate(number: Int): Int {
+        when {
+            number < 0 -> terminate("Ошибка: Число отрицательное.")
+            number == 0 -> terminate("Ошибка: Число равно нулю.")
+            else -> return number
         }
     }
-    return mutableOrders
+}
+
+/**
+ * Функция обработки числа.
+ * Проверяет число с помощью NumberValidator.validate и выводит результат.
+ */
+fun processNumber(number: Int) {
+    // TODO: Реализуйте функцию
+
+    try {
+        val validateNumber = NumberValidator.validate(number)
+        println("Число: $validateNumber")
+    }
+    catch (e: IllegalArgumentException) {
+        println(e.message)
+    }
 }

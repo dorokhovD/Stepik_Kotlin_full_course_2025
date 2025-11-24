@@ -1,10 +1,10 @@
 package corporation
 
-class Director(
-    id: Int,
-    name: String,
-    age: Int,
-    salary: Int
+data class Director(
+    override val id: Int,
+    override val name: String,
+    override val age: Int,            
+    override val salary: Int
 ): Worker(
     id = id,
     name = name,
@@ -15,6 +15,10 @@ class Director(
 
     override fun buyThings() {
         println("I'm buying things..")
+    }
+
+    override fun copy(id: Int, name: String, age: Int, salary: Int, workerType: WorkerType): Worker {
+        return copy(id = id, name = name, age = age, salary = salary)
     }
 
     fun takeCoffee(assistant: Assistant) {

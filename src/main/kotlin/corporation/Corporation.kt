@@ -11,11 +11,37 @@ fun main() {
 //    for (employee in employees) {
 //        employee.work()
 //    }
-    val accountant = Accountant(0, "Bob", 25, salary = 100000)
+    //val accountant = Accountant(0, "Bob", 25, salary = 100000)
 
-    accountant.work()
+//    val workers = WorkersRepository.workers
+//
+//    for (worker in workers) {
+//        worker.work()
+//    }
 
+//    val assistant = WorkersRepository.findAssistant()
+//
+//    assistant?.printInfo()
+//
+//    val director = WorkersRepository.findDirector()
+//
+//    director?.printInfo()
+//    if (assistant != null) {
+//        director?.takeCoffee(assistant)
+//    }
+//
+//    val directorSalary = director?.salary ?: 0
+//    val assistantSalary = assistant?.salary ?: 0
+//
+//    val sum = directorSalary + assistantSalary
+
+    val director = WorkersRepository.findDirector() ?: throwDirectorIsRequired()
+    director.printInfo()
 
 //    val shoeCard = ShoeCard(name = "Sneakers", brand = "Asics", size = 42f, price = 7000)
 //    shoeCard.printInfo()
+}
+
+fun throwDirectorIsRequired(): Nothing {
+    throw IllegalArgumentException("Директор требуется. Добавьте его в файл")
 }

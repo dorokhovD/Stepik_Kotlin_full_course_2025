@@ -2,18 +2,20 @@ package corporation
 
 import java.io.File
 
-public class ProductCardsRepository {
+object ProductCardsRepository {
 
     private val fileProductCard = File("product_cards.txt")
-    val productCards = loadAllCards()
+    private val _productCards = loadAllCards()
+    val productCards
+        get() = _productCards.toList()
 
      fun registerNewItem(card: ProductCard) {
-         productCards.add(card)
+         _productCards.add(card)
      }
 
     fun saveChanges() {
         val content = StringBuilder()
-        for (productCard in productCards) {
+        for (productCard in _productCards) {
             content.append("${productCard.name}%${productCard.brand}%${productCard.price}%")
             when (productCard) {
                 is FoodCard -> {
@@ -35,16 +37,16 @@ public class ProductCardsRepository {
     }
 
     fun removeProductCard(name: String) {
-        for (card in productCards) {
+        for (card in _productCards) {
             if (card.name == name) {
-                productCards.remove(card)
+                _productCards.remove(card)
                 break
             }
         }
     }
 
-    private fun loadAllCards(): MutableList<ProductCard> {
-        val cards = mutableListOf<ProductCard>()
+    private fun loadAllCards(): MutableSet<ProductCard> {
+        val cards = mutableSetOf<ProductCard>()
         //коллекция строк из файла
         if (!fileProductCard.exists()) fileProductCard.createNewFile()
         val content = fileProductCard.readText().trim()

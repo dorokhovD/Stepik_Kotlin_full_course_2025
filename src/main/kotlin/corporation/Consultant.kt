@@ -2,11 +2,11 @@ package corporation
 
 import kotlin.random.Random
 
-class Consultant(
-    id: Int,
-    name: String,
-    age: Int = 0,
-    salary: Int
+data class Consultant(
+    override val id: Int,
+    override val name: String,
+    override val age: Int = 0,
+    override val salary: Int
 ): Worker(
     id = id,
     name = name,
@@ -14,6 +14,14 @@ class Consultant(
     workerType = WorkerType.CONSULTANT,
     salary = salary,
 ), Cleaner {
+
+    override fun work() {
+        serveCustomers()
+    }
+
+    override fun copy(id: Int, name: String, age: Int, salary: Int, workerType: WorkerType): Worker {
+        return copy(id = id, name = name, age = age, salary = salary)
+    }
 
     override fun clean() {
         println("My position is Consultant. I,m cleaning workplace...")
@@ -35,7 +43,5 @@ class Consultant(
         }
     }
 
-    override fun work() {
-        serveCustomers()
-    }
+
 }

@@ -1,11 +1,14 @@
 package org.example.profile
 
-class Person(
-    private val name: String,
-    val surname: String,
-    private val height: Int,
-    private val weight: Int
+import corporation.Worker
+
+ data class Person(
+     val name: String,
+     val surname: String,
+     val height: Int,
+     val weight: Int
 ) {
+
 
     val fullName: String
         get() = "$name $surname"
@@ -37,4 +40,4 @@ class Person(
         print("\n")
     }
 
-}
+ }
